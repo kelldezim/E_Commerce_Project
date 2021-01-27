@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
-using API.Data;
-using API.Entities;
+using System.Threading.Tasks;
+using Core.Entities;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -17,15 +18,20 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Product>> GetProducts(){
+        public async Task<ActionResult<List<Product>>> GetProducts(){
+            //it needs to by async because many requests could be proccess in the same time
 
-            var products = _context.Products.ToList(); // performing select query on our db
+            var products = await _context.Products.ToListAsync(); // performing select query on our db
 
             return Ok(products);
         }
         [HttpGet("{id}")]
-        public string GetProduct(int id){
-            return "single product";
+        public async Task<ActionResult<Product>> GetProduct(int id){
+            // var product = await _context.Products.SingleOrDefaultAsync(n => n.Id == id);
+            // if(product == null)
+            //     return BadRequest();
+            
+            return await _context.Products.FindAsync(id);
         }
     }
 }

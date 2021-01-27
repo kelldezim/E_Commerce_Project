@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "gNOyiRmSQeM1wPH4OUqHik0IgTOJ921rX9js512NF6qd5CR2BrDkGtGgbEoja73m6chsnhnCicL36j2hPlnf9g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\kelld\\OneDrive\\Pulpit\\Code\\E_Commerce_Project\\skinet\\Core\\Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kelld\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\kelld\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

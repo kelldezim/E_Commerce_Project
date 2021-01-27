@@ -59,3 +59,7 @@ C:\Users\kelld\OneDrive\Pulpit\Code\E_Commerce_Project\skinet\API\bin\Debug\netc
 C:\Users\kelld\OneDrive\Pulpit\Code\E_Commerce_Project\skinet\API\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\kelld\OneDrive\Pulpit\Code\E_Commerce_Project\skinet\API\obj\Debug\netcoreapp3.1\API.csproj.CopyComplete
 C:\Users\kelld\OneDrive\Pulpit\Code\E_Commerce_Project\skinet\API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\kelld\OneDrive\Pulpit\Code\E_Commerce_Project\skinet\API\bin\Debug\netcoreapp3.1\Core.dll
+C:\Users\kelld\OneDrive\Pulpit\Code\E_Commerce_Project\skinet\API\bin\Debug\netcoreapp3.1\Infrastructure.dll
+C:\Users\kelld\OneDrive\Pulpit\Code\E_Commerce_Project\skinet\API\bin\Debug\netcoreapp3.1\Infrastructure.pdb
+C:\Users\kelld\OneDrive\Pulpit\Code\E_Commerce_Project\skinet\API\bin\Debug\netcoreapp3.1\Core.pdb

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace API.Data.Migrations
+namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
     [Migration("20210126214212_InitialCreate")]
