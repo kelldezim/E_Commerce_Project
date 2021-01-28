@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Entities;
+using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,17 +12,19 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private readonly StoreContext _context;
-        public ProductsController(StoreContext context)
+        private readonly IProductRepository _repo;
+
+        public ProductsController(IProductRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts(){
             //it needs to by async because many requests could be proccess in the same time
+            //using abstract repo is designed for scalible app
 
-            var products = await _context.Products.ToListAsync(); // performing select query on our db
+            var products = await _repo.GetProductsAsync(); // performing select query on our db
 
             return Ok(products);
         }
@@ -31,7 +34,7 @@ namespace API.Controllers
             // if(product == null)
             //     return BadRequest();
             
-            return await _context.Products.FindAsync(id);
+            return await _repo.GetProductByIdAsync(id);
         }
     }
 }
