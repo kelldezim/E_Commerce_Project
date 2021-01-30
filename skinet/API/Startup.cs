@@ -28,6 +28,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IProductRepository, ProductRepository>(); // Singlton//Transient or Scoped --> differential of lifetime
+            services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
             services.AddControllers();
             //To receive context of Db we have to access db using connection string
             services.AddDbContext<StoreContext>(x => 
