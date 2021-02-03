@@ -75,6 +75,8 @@ namespace API
 
             app.UseAuthorization();
 
+            //required packages:
+            //Swashbuckle.ASPNetCore.SwaggerUi // .SwaggerGen
             app.UseSwagger();
             app.UseSwaggerUI(c => {c
                 .SwaggerEndpoint("/swagger/v1/swagger.json", "SkiNet API v1");});

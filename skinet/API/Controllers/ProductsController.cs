@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Controllers.Dtos;
+using API.Errors;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,6 +44,8 @@ namespace API.Controllers
 
         }
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)] // atributes required to define documentation in Swagger
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             // var product = await _context.Products.SingleOrDefaultAsync(n => n.Id == id);
@@ -50,18 +54,22 @@ namespace API.Controllers
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
             var product = await _productsRepo.GetEntityWithSpec(spec);
 
-            return _mapper.Map<Product, ProductToReturnDto>(product);
-    }
+            if(product == null){
+                return NotFound(new ApiResponse(404));
+            }
 
-    [HttpGet("brands")]
-    public async Task<ActionResult<ProductBrand>> GetProductBrands()
-    {
-        return Ok(await _productBrandRepo.ListAllAsync());
+            return _mapper.Map<Product, ProductToReturnDto>(product);
+        }
+
+        [HttpGet("brands")]
+        public async Task<ActionResult<ProductBrand>> GetProductBrands()
+        {
+            return Ok(await _productBrandRepo.ListAllAsync());
+        }
+        [HttpGet("types")]
+        public async Task<ActionResult<ProductType>> GetProductTypes()
+        {
+            return Ok(await _productTypeRepo.ListAllAsync());
+        }
     }
-    [HttpGet("types")]
-    public async Task<ActionResult<ProductType>> GetProductTypes()
-    {
-        return Ok(await _productTypeRepo.ListAllAsync());
-    }
-}
 }
