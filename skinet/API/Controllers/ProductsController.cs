@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Controllers.Dtos;
 using API.Errors;
+using API.Helpers;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
@@ -31,16 +32,21 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams productParams)
+            //if we pass object type arg in request we need [FromQuery] attribute
+            //pagination class straight away allow to store it in pages (previously IReadOnlyList)
         {
             //it needs to by async because many requests could be proccess in the same time
             //using abstract repo is designed for scalible app
             // changing repo into spec to get more flex on queries from DB
 
-            var spec = new ProductsWithTypesAndBrandsSpecification();
+            var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
+            var countSpec = new ProductWithFiltersForCountSpecification(productParams);
+            var totalItems = await _productsRepo.CountAsync(countSpec); 
             var products = await _productsRepo.ListAsync(spec); // performing select query on our db
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
 
-            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
+            return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
 
         }
         [HttpGet("{id}")]
