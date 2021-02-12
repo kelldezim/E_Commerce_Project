@@ -1,1 +1,81 @@
 E_Commerce_Project
+
+Pagination --> Perfomance
+Deferred Execution
+	Query commands are stored in variables
+	Execution of the query is deferred
+	IQueryable<T> creates an expression tree
+	
+	Execution:
+	ToList(), ToArray(), ToDictionary()
+	Count() or the singleton queries
+
+SQLite is problematic if we want to work with Decimals
+
+CORS = cross origin resource sharing
+
+Creating Angular Project:
+ng new client
+Yes add Angular Routing
+
+
+
+Error/Fixes:
+ng : File C:\Users\bwrg73\AppData\Roaming\npm\ng.ps1 cannot be loaded. The file C:\Users\bwrg73\AppData\Roaming\npm\ng.ps1 is not digitally signed. You cannot run this script on the current system. For more information    
+about running scripts and setting execution policy, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.
+Solution:
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUse
+
+Error/Fixes
+An unhandled exception occurred: Cannot find module '@schematics/angular/utility/config'
+Require stack:
+- C:\Users\bwrg73\Desktop\E_Commerce\E_Commerce_Project\skinet\client\node_modules\ngx-bootstrap\schematics\ng-add\index.js
+- C:\Users\bwrg73\Desktop\E_Commerce\E_Commerce_Project\skinet\client\node_modules\@angular-devkit\schematics\tools\export-ref.js
+- C:\Users\bwrg73\Desktop\E_Commerce\E_Commerce_Project\skinet\client\node_modules\@angular-devkit\schematics\tools\index.js
+- C:\Users\bwrg73\Desktop\E_Commerce\E_Commerce_Project\skinet\client\node_modules\@angular\cli\utilities\json-schema.js
+- C:\Users\bwrg73\Desktop\E_Commerce\E_Commerce_Project\skinet\client\node_modules\@angular\cli\models\command-runner.js
+- C:\Users\bwrg73\Desktop\E_Commerce\E_Commerce_Project\skinet\client\node_modules\@angular\cli\lib\cli\index.js
+- C:\Users\bwrg73\AppData\Roaming\npm\node_modules\@angular\cli\lib\init.js
+- C:\Users\bwrg73\AppData\Roaming\npm\node_modules\@angular\cli\bin\ng
+See "C:\Users\bwrg73\AppData\Local\Temp\ng-C62xsI\angular-errors.log" for further details.
+Solution:(no compability with Angular 9+)
+npm uninstall @schematics/angular
+npm install @schematics/angular@9.1.0
+
+
+Angular setup:
+
+Bootstrap for Angular(ng add ngx-bootstrap)
+Font Awesome (npm install font-awesome)
+
+Usefull Extensions:
+Angular Language Service
+Angular Snippets
+Bracket Pair Colorizer
+Prettier Code Formatter
+TSLint
+
+Space for new components (\client\src\app>)
+
+CSS:
+(display:flex)
+justify-content:
+flex-start: Items align to the left side of the container.
+flex-end: Items align to the right side of the container.
+center: Items align at the center of the container.
+space-between: Items display with equal spacing between them.
+space-around: Items display with equal spacing around them.
+
+align-items:
+flex-start: Items align to the top of the container.
+flex-end: Items align to the bottom of the container.
+center: Items align at the vertical center of the container.
+baseline: Items display at the baseline of the container.
+stretch: Items are stretched to fit the container.
+
+flex-direction:
+row: Items are placed the same as the text direction.
+row-reverse: Items are placed opposite to the text direction.
+column: Items are placed top to bottom.
+column-reverse: Items are placed bottom to top.
+
