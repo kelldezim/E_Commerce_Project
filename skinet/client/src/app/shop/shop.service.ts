@@ -1,16 +1,45 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { IBrand } from '../shared/models/brand';
 import { IPagination } from '../shared/models/pagination';
+import { IType } from '../shared/models/productTypes';
+import { map } from 'rxjs/operators';
+import { ShopParams } from '../shared/models/shopParams';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
+  // service allow us to connect with API
   baseUrl = 'https://localhost:5001/api/';
 
   constructor(private http: HttpClient) { }
 
-  getProducts(){
-    return this.http.get<IPagination>(this.baseUrl + 'products?pageSize=50');
+  getProducts(shopParams?: ShopParams){
+    let params = new HttpParams();
+
+    if(shopParams.brandId !== 0){
+      params = params.append('brandId', shopParams.brandId.toString());
+    }
+    if(shopParams.typeId !== 0){
+      params = params.append('typeId', shopParams.typeId.toString());
+    }
+
+    params = params.append('sort', shopParams.sort);
+    params = params.append('pageIndex', shopParams.pageNumber.toString());
+    params = params.append('pageIndex', shopParams.pageSize.toString());
+
+    return this.http.get<IPagination>(this.baseUrl + 'products', {observe: 'response', params})
+    //pipe method is wrapping all rxjs operators
+      .pipe(
+        map(response => { return response.body; })
+      );
   }
+  getBrand(){
+    return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
+  }
+  getTypes(){
+    return this.http.get<IType[]>(this.baseUrl + 'products/types');
+  }
+  
 }
