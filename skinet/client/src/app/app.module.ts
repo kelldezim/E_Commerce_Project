@@ -18,7 +18,6 @@ import { HomeModule } from './home/home.module';
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
-    ShopModule,
     HomeModule
   ],
   providers: [],
