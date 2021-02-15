@@ -9,6 +9,9 @@ import { ShopModule } from './shop/shop.module';
 import { HomeComponent } from './home/home.component';
 import { HomeModule } from './home/home.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { ToastNoAnimationModule } from 'ngx-toastr';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
-    HomeModule
+    HomeModule,
+    ToastNoAnimationModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
