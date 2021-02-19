@@ -12,7 +12,10 @@ import { ShopService } from '../shop.service';
 export class ProductDetailsComponent implements OnInit {
   product: IProduct;
 
-  constructor(private shopService: ShopService, private activatedRoute: ActivatedRoute, private bcService: BreadcrumbService) { }
+  constructor(private shopService: ShopService, private activatedRoute: ActivatedRoute, private bcService: BreadcrumbService ) {
+    // it's set to empty string to not display product ID during refresh product details comp
+    this.bcService.set('@productDetails', ' ');
+  }
 
   ngOnInit(): void {
     this.loadProduct();
