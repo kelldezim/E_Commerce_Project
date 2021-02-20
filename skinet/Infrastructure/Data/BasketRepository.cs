@@ -1,24 +1,44 @@
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
+using StackExchange.Redis;
 
 namespace Infrastructure.Data
 {
     public class BasketRepository : IBasketRepository
     {
-        public Task<bool> DeleteBasketAsync(string basketId)
+        private readonly IDatabase _database;
+        public BasketRepository(IConnectionMultiplexer redis)
         {
-            throw new System.NotImplementedException();
+            _database = redis.GetDatabase();
         }
 
-        public Task<CustomerBasket> GetBasketAsync(string basketId)
+        public async Task<bool> DeleteBasketAsync(string basketId)
         {
-            throw new System.NotImplementedException();
+            return await _database.KeyDeleteAsync(basketId);
         }
 
-        public Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
+        public async Task<CustomerBasket> GetBasketAsync(string basketId)
         {
-            throw new System.NotImplementedException();
+            var data = await _database.StringGetAsync(basketId); // we need to serialize it into string as like that is stored in Redis
+
+            return data.IsNullOrEmpty ? null : JsonSerializer.Deserialize<CustomerBasket>(data);
+        }
+
+        public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
+        {
+            // we replace existing basket with new one
+            // also we have to decide about the Life Time of basket --> our storage capacity
+
+            var created = await _database.StringSetAsync(basket.Id,
+                 JsonSerializer.Serialize(basket), TimeSpan.FromDays(30));
+
+            if(!created)
+                return null;
+            
+            return await GetBasketAsync(basket.Id);
         }
     }
 }
