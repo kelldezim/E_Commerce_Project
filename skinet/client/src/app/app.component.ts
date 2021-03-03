@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   title = 'Skinet';
 
   constructor(private basketService: BasketService){ }
-  
+
   ngOnInit(): void {
     const basketId = localStorage.getItem('basket_id');
     if (basketId) {
