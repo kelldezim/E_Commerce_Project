@@ -35,7 +35,7 @@ export class ShopService {
     params = params.append('pageIndex', shopParams.pageSize.toString());
 
     return this.http.get<IPagination>(this.baseUrl + 'products', {observe: 'response', params})
-    //pipe method is wrapping all rxjs operators
+    // pipe method is wrapping all rxjs operators
       .pipe(
         map(response => { return response.body; })
       );
