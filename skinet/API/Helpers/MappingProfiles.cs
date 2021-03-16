@@ -15,7 +15,9 @@ namespace API.Helpers
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
 
             // same props so automapper handles it
-            CreateMap<Address, AddressDto>().ReverseMap(); 
+            CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<CustomerBasketDto, CustomerBasket>();
+            CreateMap<BasketItemsDto, BasketItems>();
         }
     }
 }
